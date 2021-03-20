@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -16,30 +19,73 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            shrinkResources false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        dataBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
     }
 }
 
 dependencies {
+    /* All Source Dependencies */
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
+    implementation "org.jetbrains.anko:anko-commons:$ankoVersion"
+    implementation "androidx.core:core-ktx:$androidCoreVersion"
+    implementation "androidx.appcompat:appcompat:$androidAppCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.exifinterface:exifinterface:$exifinterfaceVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModelVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "com.google.android.material:material:$materialUiVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "ru.terrakok.cicerone:cicerone:$ciceroneVersion"
+    implementation 'com.google.firebase:firebase-auth:20.0.2'
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.2.1"
+    implementation "org.kodein.di:kodein-di-framework-android-x:6.2.1"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.21"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    /* Kotlin Annotation Processing Dependencies */
+    kapt group: "androidx.room", name: "room-compiler", version: "$roomVersion"
+
+    /* Test Source Dependencies */
+    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "$jupiterVersion"
+    testImplementation group: "org.mockito", name: "mockito-junit-jupiter", version: "$mockitoJunitVersion"
+    testImplementation group: "org.mockito", name: "mockito-core", version: "$mockitoCoreVersion"
+    testImplementation group: "org.junit.platform", name: "junit-platform-surefire-provider", version: "$junitSurefireVersion"
+    testImplementation group: "org.junit.platform", name: "junit-platform-runner", version: "$junitPlatformRunnerVersion"
+    testImplementation group: "org.junit.vintage", name: "junit-vintage-engine", version: "$junitVintageEngineVersion"
+    testImplementation group: "androidx.arch.core", name: "core-testing", version: "$androidCoreTestingVersion"
+    testImplementation group: "androidx.room", name: "room-testing", version: "$roomVersion"
+    testImplementation group: "androidx.test.ext", name: "junit", version: "$androidJunitVersion"
+
+    /* Android Test Source Dependencies */
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidEspressoCoreVersion"
 }
