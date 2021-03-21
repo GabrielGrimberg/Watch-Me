@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Watch Me</string>
+    <string name="ok">OK</string>
+    <string name="network_error">Network Error, Try Again?</string>
+    <string name="error">Error</string>
+    <string name="title_message">You must enter a name for a movie</string>
+    <string name="enter_title">You must enter a name for a movie</string>
+    <string name="delete">Delete</string>
+    <string name="movie">Movie</string>
+    <string name="image_of_movie_icon">Image of Movie Icon</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="movie_hint_year">1997</string>
+    <string name="movie_title_hint">Title</string>
+    <string name="button_to_add_movie">Button to Add Movie</string>
 </resources>
