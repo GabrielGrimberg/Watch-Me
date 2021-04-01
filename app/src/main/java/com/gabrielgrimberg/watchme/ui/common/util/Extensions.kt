@@ -2,7 +2,7 @@
  * Extensions.kt provides the ability to extend a class with new functionality without
  * having to inherit from the class or use any type of design pattern such as Decorator.
  */
-package com.gabrielgrimberg.watchme.ui.common
+package com.gabrielgrimberg.watchme.ui.common.util
 
 import android.view.View
 import android.widget.ImageView

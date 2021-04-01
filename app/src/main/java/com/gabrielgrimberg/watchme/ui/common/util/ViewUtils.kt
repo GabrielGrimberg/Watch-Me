@@ -1,4 +1,4 @@
-package com.gabrielgrimberg.watchme.ui.common
+package com.gabrielgrimberg.watchme.ui.common.util
 
 import android.content.Context
 import android.content.Intent
